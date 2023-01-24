@@ -7,8 +7,8 @@ import 'package:reddit_clone/theme/platter.dart';
 class SignInButton extends ConsumerWidget {
   const SignInButton({Key? key}) : super(key: key);
 
-  void signInWithGoogle(WidgetRef ref) {
-    ref.read(authControllerProvider).googleSignIn();
+  void signInWithGoogle(final BuildContext context, final WidgetRef ref) {
+    ref.read(authControllerProvider.notifier).googleSignIn(context);
   }
 
   @override
@@ -17,7 +17,7 @@ class SignInButton extends ConsumerWidget {
       padding: const EdgeInsets.fromLTRB(35, 0, 35, 0),
       child: ElevatedButton.icon(
         icon: Image.asset(ImageConstants.googleLogo, height: 25),
-        onPressed: () => signInWithGoogle(ref),
+        onPressed: () => signInWithGoogle(context, ref),
         label: const Text(
           'Continue with Google',
           style: TextStyle(color: Pallete.blackColor),

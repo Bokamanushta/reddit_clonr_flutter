@@ -1,15 +1,30 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:reddit_clone/core/utils.dart';
 import 'package:reddit_clone/features/auth/dal/auth_dal.dart';
+import 'package:reddit_clone/models/user_model.dart';
 
-final authControllerProvider =
-    Provider((ref) => AuthController(authDAL: ref.read(authDALProvider)));
+final authControllerProvider = StateNotifierProvider<AuthController, bool>(
+    (ref) => AuthController(authDAL: ref.watch(authDALProvider), ref: ref));
 
-class AuthController {
+final userProvider = StateProvider<UserModel?>((ref) => null);
+
+class AuthController extends StateNotifier<bool> {
   final AuthDAL _authDAL;
+  final Ref _ref;
 
-  AuthController({required AuthDAL authDAL}) : _authDAL = authDAL;
+  AuthController({required AuthDAL authDAL, required Ref ref})
+      : _authDAL = authDAL,
+        _ref = ref,
+        super(false);
 
-  void googleSignIn() {
-    _authDAL.signInWithGoogle();
+  void googleSignIn(final BuildContext context) async {
+    state = true;
+    final user = await _authDAL.signInWithGoogle();
+    state = false;
+    user.fold(
+        (failure) => showSnackBar(context, failure.message),
+        (userModel) =>
+            _ref.read(userProvider.notifier).update((state) => userModel));
   }
 }

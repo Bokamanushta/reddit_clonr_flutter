@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "999694322267-hpklhkd1qr9vqhd4f10jf4od7lelp3m2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.reddit_clone",
+            "certificate_hash": "4d497075ba94deef18e9cf6e690cdbbc4a6bba9e"
+          }
+        },
+        {
           "client_id": "999694322267-bd72vrjk96a381cb5kbq44asohue3scd.apps.googleusercontent.com",
           "client_type": 3
         }
