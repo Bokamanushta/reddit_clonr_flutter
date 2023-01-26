@@ -26,7 +26,7 @@ class AuthDAL {
   CollectionReference get _userRef =>
       _firebaseFirestore.collection(FirebaseConstants.usersCollection);
 
-  Stream<User?> get _authStateChanged => _firebaseAuth.authStateChanges();
+  Stream<User?> get authStateChanged => _firebaseAuth.authStateChanges();
 
   AuthDAL(
       {required FirebaseFirestore firebaseFirestore,
