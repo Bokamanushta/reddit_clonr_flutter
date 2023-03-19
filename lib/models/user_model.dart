@@ -53,7 +53,7 @@ class UserModel {
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
       name: map['name'] ?? '',
-      profilePicture: map['profilePic'] ?? '',
+      profilePicture: map['profilePicture'] ?? '',
       banner: map['banner'] ?? '',
       uid: map['uid'] ?? '',
       isAuthenticated: map['isAuthenticated'] ?? false,
@@ -89,5 +89,9 @@ class UserModel {
         isAuthenticated.hashCode ^
         karma.hashCode ^
         awards.hashCode;
+  }
+
+  String getProfilePictureURL() {
+    return (profilePicture.isNotEmpty) ? profilePicture : banner;
   }
 }
